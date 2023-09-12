@@ -15,6 +15,7 @@ jobs:
             ${{ runner.os }}-pip-
       - name: set up python
         uses: actions/setup-python@v4
+        # TODO fix set python version
 
       - name: install dependencies
         run: |
