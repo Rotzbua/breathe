@@ -536,7 +536,7 @@ class SphinxRenderer:
             parts = refid.rsplit("_", 1)
             if len(parts) == 2 and parts[1].startswith("1"):
                 anchorid = parts[1][1:]
-                if len(anchorid) in set([33, 34]) and parts[0].endswith(anchorid):
+                if len(anchorid) in {33, 34} and parts[0].endswith(anchorid):
                     return parts[0][: -len(anchorid)] + parts[1]
                 elif len(anchorid) > 34:
                     index = 0
@@ -556,7 +556,7 @@ class SphinxRenderer:
         if self.app.config.breathe_separate_member_pages:
             refid = self._fixup_separate_member_pages(refid)
         if self.app.config.breathe_use_project_refids:
-            return "%s%s" % (self.project_info.name(), refid)
+            return f"{self.project_info.name()}{refid}"
         else:
             return refid
 
@@ -728,7 +728,7 @@ class SphinxRenderer:
         if config.breathe_debug_trace_qualification:
 
             def debug_print_node(n):
-                return "node_type={}".format(n.node_type)
+                return f"node_type={n.node_type}"
 
             global _debug_indent
             print(
@@ -1126,7 +1126,7 @@ class SphinxRenderer:
             # Defer to domains specific directive.
 
             templatePrefix = self.create_template_prefix(file_data.compounddef)
-            arg = "%s %s" % (templatePrefix, self.get_fully_qualified_name())
+            arg = f"{templatePrefix} {self.get_fully_qualified_name()}"
 
             # add base classes
             if kind in ("class", "struct"):
@@ -1968,7 +1968,7 @@ class SphinxRenderer:
                 param_decl = get_param_decl(param)
                 param_list.append(param_decl)
             templatePrefix = self.create_template_prefix(node)
-            signature = "{0}{1}({2})".format(
+            signature = "{}{}({})".format(
                 templatePrefix, get_definition_without_template_args(node), ", ".join(param_list)
             )
 
@@ -2409,7 +2409,7 @@ class SphinxRenderer:
         dot += '    edge [color="#1414CE"]\n'
         relations = []
         for g_node in node.get_node():
-            dot += '    "%s" [label="%s"' % (g_node.get_id(), g_node.get_label())
+            dot += f'    "{g_node.get_id()}" [label="{g_node.get_label()}"'
             dot += ' tooltip="%s"' % g_node.get_label()
             if g_node.get_id() == "1":
                 # the disabled grey color is used in doxygen to indicate that the URL is

@@ -53,7 +53,7 @@ class _DoxygenBaseItemDirective(BaseDirective):
         finder.filter_(finder_filter, matches)
 
         if len(matches) == 0:
-            display_name = "%s::%s" % (namespace, name) if namespace else name
+            display_name = f"{namespace}::{name}" if namespace else name
             warning = self.create_warning(project_info, kind=self.kind, display_name=display_name)
             return warning.warn('doxygen{kind}: Cannot find {kind} "{display_name}" {tail}')
 
@@ -83,7 +83,7 @@ class DoxygenConceptDirective(_DoxygenBaseItemDirective):
         # We're using C++ namespaces here, it might be best to make this file
         # type dependent
         #
-        xml_name = "%s::%s" % (namespace, name) if namespace else name
+        xml_name = f"{namespace}::{name}" if namespace else name
         return self.filter_factory.create_compound_finder_filter(xml_name, "concept")
 
 
@@ -110,5 +110,5 @@ class DoxygenUnionDirective(_DoxygenBaseItemDirective):
         # We're using C++ namespaces here, it might be best to make this file
         # type dependent
         #
-        xml_name = "%s::%s" % (namespace, name) if namespace else name
+        xml_name = f"{namespace}::{name}" if namespace else name
         return self.filter_factory.create_compound_finder_filter(xml_name, "union")

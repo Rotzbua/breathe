@@ -46,7 +46,7 @@ def print_info(msg, args):
 
 def write_file(name, text, args):
     """Write the output file for module/package <name>."""
-    fname = os.path.join(args.destdir, "%s.%s" % (name, args.suffix))
+    fname = os.path.join(args.destdir, f"{name}.{args.suffix}")
     if args.dryrun:
         print_info("Would create file %s." % fname, args)
         return
@@ -79,12 +79,12 @@ def format_heading(level, text):
     underlining = ["=", "-", "~",][
         level - 1
     ] * len(text)
-    return "%s\n%s\n\n" % (text, underlining)
+    return f"{text}\n{underlining}\n\n"
 
 
 def format_directive(package_type, package, args):
     """Create the breathe directive and add the options."""
-    directive = ".. doxygen%s:: %s\n" % (package_type, package)
+    directive = f".. doxygen{package_type}:: {package}\n"
     if args.project:
         directive += "   :project: %s\n" % args.project
     if args.members and package_type in MEMBERS_TYPES:
@@ -97,7 +97,7 @@ def create_package_file(package, package_type, package_id, args):
     # Skip over types that weren't requested
     if package_type not in args.outtypes:
         return
-    text = format_heading(1, "%s %s" % (TYPEDICT[package_type], package))
+    text = format_heading(1, f"{TYPEDICT[package_type]} {package}")
     text += format_directive(package_type, package, args)
 
     write_file(os.path.join(package_type, package_id), text, args)

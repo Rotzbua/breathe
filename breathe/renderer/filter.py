@@ -565,16 +565,14 @@ class Glob:
 
 class FilterFactory:
     # C++ style public entries
-    public_kinds = set(
-        [
+    public_kinds = {
             "public-type",
             "public-func",
             "public-attrib",
             "public-slot",
             "public-static-func",
             "public-static-attrib",
-        ]
-    )
+    }
 
     def __init__(self, app: Sphinx) -> None:
         self.app = app
@@ -586,7 +584,7 @@ class FilterFactory:
             raise UnrecognisedKindError(kind)
 
         # Generate new dictionary from defaults
-        filter_options = dict((entry, "") for entry in self.app.config.breathe_default_members)
+        filter_options = {entry: "" for entry in self.app.config.breathe_default_members}
 
         # Update from the actual options
         filter_options.update(options)
@@ -622,7 +620,7 @@ class FilterFactory:
         """Content filter for classes based on various directive options"""
 
         # Generate new dictionary from defaults
-        filter_options = dict((entry, "") for entry in self.app.config.breathe_default_members)
+        filter_options = {entry: "" for entry in self.app.config.breathe_default_members}
 
         # Update from the actual options
         filter_options.update(options)
@@ -671,7 +669,7 @@ class FilterFactory:
                 prefix = ("%s::" % outerclass) if outerclass else ""
 
                 # Matches sphinx-autodoc behaviour of comma separated values
-                members = set(["%s%s" % (prefix, x.strip()) for x in text.split(",")])
+                members = {f"{prefix}{x.strip()}" for x in text.split(",")}
                 node_valueOf_is_in_members = node.valueOf.is_one_of(members)
 
                 # Accept any nodes which don't have a "sectiondef" as a parent or, if they do, only
@@ -752,7 +750,7 @@ class FilterFactory:
                 text = options["members"]
 
                 # Matches sphinx-autodoc behaviour of comma separated values
-                members = set([x.strip() for x in text.split(",")])
+                members = {x.strip() for x in text.split(",")}
 
                 node_name_is_in_members = node.name.is_one_of(members)
 

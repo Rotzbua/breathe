@@ -3,7 +3,7 @@ import textwrap
 
 
 def format_parser_error(name, error, filename, state, lineno, do_unicode_warning):
-    warning = '%s: Unable to parse xml file "%s". ' % (name, filename)
+    warning = f'{name}: Unable to parse xml file "{filename}". '
     explanation = "Reported error: %s. " % error
 
     unicode_explanation_text = ""
