@@ -1,10 +1,11 @@
 from __future__ import annotations
 
-import os
 from pathlib import Path
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
+    import os
+
     from sphinx.application import Sphinx
     from sphinx.environment import BuildEnvironment
 
@@ -24,11 +25,11 @@ class MTimeError(Exception):
     pass
 
 
-def _getmtime(filename: str):
+def _getmtime(filename: str) -> float:
     try:
-        return os.path.getmtime(filename)
-    except OSError:
-        raise MTimeError("Cannot find file: %s" % os.path.realpath(filename))
+        return Path(filename).stat().st_mtime
+    except (FileNotFoundError, PermissionError, OSError):
+        raise MTimeError(f"Cannot find/access file: {Path(filename).resolve()}")
 
 
 def update(app: Sphinx, source_file: str | os.PathLike[str]) -> None:

@@ -1,11 +1,11 @@
 from __future__ import annotations
 
-import os
 from pathlib import Path
 from shlex import quote
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
+    import os
     from typing import Callable
 
     from breathe.project import AutoProjectInfo, ProjectInfoFactory
@@ -106,4 +106,4 @@ class AutoDoxygenProcessHandle:
         # Windows. See issue #271
         self.run_process(f"doxygen {quote(cfgfile)}", cwd=build_dir, shell=True)
 
-        return os.path.join(build_dir, name, "xml")
+        return str(build_dir / name / "xml")

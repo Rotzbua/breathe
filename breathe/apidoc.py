@@ -127,7 +127,7 @@ class TypeAction(argparse.Action):
         self.default = TYPEDICT.keys()
         self.metavar = ",".join(TYPEDICT.keys())
 
-    def __call__(self, parser, namespace, values, option_string=None):
+    def __call__(self, parser, namespace, values, option_string=None) -> None:
         value_list = values.split(",")
         for value in value_list:
             if value not in TYPEDICT:
@@ -135,7 +135,7 @@ class TypeAction(argparse.Action):
         setattr(namespace, self.dest, value_list)
 
 
-def main():
+def main() -> None:
     """Parse and check the command line arguments."""
     parser = argparse.ArgumentParser(
         description="""\
@@ -210,16 +210,16 @@ Note: By default this script will not overwrite already created files.""",
     args = parser.parse_args()
 
     args.suffix = args.suffix.removeprefix(".")
-    if not os.path.isdir(args.rootpath):
+    if not Path(args.rootpath).is_dir():
         print("%s is not a directory." % args.rootpath, file=sys.stderr)
         sys.exit(1)
-    if "index.xml" not in os.listdir(args.rootpath):
+    if "index.xml" not in os.listdir(args.rootpath):  # noqa: PTH208
         print("%s does not contain a index.xml" % args.rootpath, file=sys.stderr)
         sys.exit(1)
-    if not os.path.isdir(args.destdir):
+    if not Path(args.destdir).is_dir():
         if not args.dryrun:
-            os.makedirs(args.destdir)
-    args.rootpath = os.path.abspath(args.rootpath)
+            Path(args.destdir).mkdir(parents=True)
+    args.rootpath = str(Path(args.rootpath).resolve())
     recurse_tree(args)
     if not args.notoc:
         for key in args.outtypes:

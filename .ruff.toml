@@ -29,6 +29,7 @@ select = [
     "PT",    # flake8-pytest-style
     "TC",    # flake8-type-checking
     "TID",   # flake8-tidy-imports
+    "PTH",   # flake8-use-pathlib
     "UP",    # pyupgrade
     "W",     # pycodestyle
 ]

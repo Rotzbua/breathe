@@ -30,10 +30,10 @@ class AutoProjectInfo:
         self._build_dir = build_dir
         self._reference = reference
 
-    def name(self):
+    def name(self) -> str:
         return self._name
 
-    def build_dir(self):
+    def build_dir(self) -> str:
         return self._build_dir
 
     def abs_path_to_source_file(self, file_):
@@ -44,39 +44,39 @@ class AutoProjectInfo:
 
         return Path(self.app.confdir, self._source_path, file_).resolve()
 
-    def create_project_info(self, project_path):
+    def create_project_info(self, project_path: str):
         """Creates a proper ProjectInfo object based on the information in this AutoProjectInfo"""
 
         return ProjectInfo(self.app, self._name, project_path, self._source_path, self._reference)
 
 
 class ProjectInfo:
-    def __init__(self, app: Sphinx, name: str, path: str, source_path: str, reference: str):
+    def __init__(self, app: Sphinx, name: str, project_path: str, source_path: str, reference: str):
         self.app = app
 
         self._name = name
-        self._project_path = path
+        self._project_path = project_path
         self._source_path = source_path
         self._reference = reference
 
     def name(self) -> str:
         return self._name
 
-    def project_path(self):
+    def project_path(self) -> str:
         return self._project_path
 
-    def source_path(self):
+    def source_path(self) -> str:
         return self._source_path
 
-    def relative_path_to_xml_file(self, file_):
+    def relative_path_to_xml_file(self, file_) -> str:
         """
-        Returns relative path from Sphinx documentation top-level source directory to the specified
-        file assuming that the specified file is a path relative to the doxygen xml output
-        directory.
+        Returns the relative path from Sphinx documentation top-level source directory to the
+        specified file assuming that the specified file is a path relative to the doxygen xml
+        output directory.
         """
 
         # os.path.join does the appropriate handling if _project_path is an absolute path
-        full_xml_project_path = os.path.join(self.app.confdir, self._project_path, file_)
+        full_xml_project_path = os.path.join(self.app.confdir, self._project_path, file_)  # noqa: PTH118
         return os.path.relpath(full_xml_project_path, self.app.srcdir)
 
     def sphinx_abs_path_to_file(self, file_):
@@ -88,7 +88,7 @@ class ProjectInfo:
         """
         return os.path.sep + self.relative_path_to_xml_file(file_)
 
-    def reference(self):
+    def reference(self) -> str:
         return self._reference
 
     def domain_for_file(self, file_: str) -> str:
@@ -112,8 +112,8 @@ class ProjectInfoFactory:
         # note: don't access self.app.config now, as we are instantiated at setup-time.
 
         # Assume general build directory is the parent of the doctree directory.
-        # This can be overridden with the breathe_build_directory config variable
-        self._default_build_dir = os.path.dirname(os.path.normpath(app.doctreedir))
+        # This can be overridden with the breathe_build_directory config variable.
+        self._default_build_dir = str(Path(app.doctreedir).resolve().parent)
         self.project_count = 0
         self.project_info_store: dict[str, ProjectInfo] = {}
         self.project_info_for_auto_store: dict[str, AutoProjectInfo] = {}

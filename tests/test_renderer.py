@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import os
 from pathlib import Path
 
 import pytest
@@ -31,7 +30,7 @@ def app(test_params, app_params, make_app, shared_result):
     """
     args, kwargs = app_params
     assert "srcdir" in kwargs
-    os.makedirs(kwargs["srcdir"], exist_ok=True)
+    Path(kwargs["srcdir"]).mkdir(parents=True, exist_ok=True)
     (kwargs["srcdir"] / "conf.py").write_text("", encoding="ascii")
     app_ = make_app(*args, **kwargs)
     yield app_

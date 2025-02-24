@@ -201,7 +201,7 @@ We have to write:
 
 from __future__ import annotations
 
-import os
+from pathlib import Path
 from typing import TYPE_CHECKING
 
 from breathe import path_handler
@@ -466,7 +466,7 @@ class FilePathFilter(Filter):
             #
             # This is to prevent "Util.cpp" matching "PathUtil.cpp"
             #
-            location_basename = os.path.basename(location)
+            location_basename = Path(location).name
             return location_basename == self.target_file
 
 

@@ -5,7 +5,7 @@ A module to house the methods for resolving a code-blocks language based on file
 
 from __future__ import annotations
 
-import os.path
+from pathlib import Path
 
 from pygments.lexers import get_lexer_for_filename
 from pygments.util import ClassNotFound
@@ -24,7 +24,8 @@ def get_extension(filename: str) -> str:
     "Get extension from filename"
     # If the filename is just '.ext' then we get ('.ext', '') so we fall back to first part if
     # the second isn't there
-    (first, second) = os.path.splitext(filename)
+    first = Path(filename).stem
+    second = Path(filename).suffix
 
     # Doxygen allows users to specify the file extension ".unparsed" to disable syntax highlighting.
     # We translate it into the pygments un-highlighted 'text' type
