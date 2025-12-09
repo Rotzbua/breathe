@@ -10,7 +10,6 @@ from typing import TYPE_CHECKING
 from xml.parsers import expat
 
 import pytest
-import sphinx
 
 from breathe.process import AutoDoxygenProcessHandle
 
