@@ -62,6 +62,10 @@ jobs:
         include:
           - python-version: '3.14'
             sphinx-version: '8.2'
+            doxygen-version: '1.9.4'
+          - python-version: '3.14'
+            sphinx-version: '8.2'
+            doxygen-version: '1.9.7'
 
     steps:
     - uses: actions/checkout@v6
