@@ -6,17 +6,11 @@ import os
 import pathlib
 import shutil
 import subprocess
-from typing import TYPE_CHECKING
 from xml.parsers import expat
 
 import pytest
 
 from breathe.process import AutoDoxygenProcessHandle
-
-if TYPE_CHECKING:
-    from typing import Any
-
-sphinx_path: Any
 
 sphinx_path = pathlib.Path
 
