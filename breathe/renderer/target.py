@@ -6,8 +6,8 @@ from docutils import nodes
 from sphinx.util.nodes import make_id
 
 if TYPE_CHECKING:
-    from collections.abc import Mapping, Sequence
-    from typing import Any, Callable
+    from collections.abc import Callable, Mapping, Sequence
+    from typing import Any
 
     from docutils.nodes import Element
     from sphinx.environment import BuildEnvironment

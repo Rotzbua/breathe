@@ -3,10 +3,10 @@ from __future__ import annotations
 import re
 import textwrap
 from collections import defaultdict
+from collections.abc import Callable
 from pathlib import Path
 from typing import (
     TYPE_CHECKING,
-    Callable,
     Generic,
     Literal,
     TypeVar,
@@ -790,7 +790,7 @@ class SphinxRenderer(metaclass=NodeVisitor):
         node = node_stack[0].value
         # An enumvalueType node doesn't have location, so use its parent node
         # for detecting the domain instead.
-        if isinstance(node, (str, parser.Node_enumvalueType)):
+        if isinstance(node, str | parser.Node_enumvalueType):
             node = node_stack[1].value
         filename = get_filename(node)
         if not filename and isinstance(node, parser.Node_CompoundType):
@@ -1962,7 +1962,7 @@ class SphinxRenderer(metaclass=NodeVisitor):
         for n in self.context.node_stack[1:]:
             if isinstance(
                 n.value,
-                (parser.Node_docSect1Type, parser.Node_docSect2Type, parser.Node_docSect3Type),
+                parser.Node_docSect1Type | parser.Node_docSect2Type | parser.Node_docSect3Type,
             ):
                 actual_d += 1
 

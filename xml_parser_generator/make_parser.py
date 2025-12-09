@@ -16,8 +16,8 @@ from typing import TYPE_CHECKING, NamedTuple, TypeVar, cast
 import jinja2
 
 if TYPE_CHECKING:
-    from collections.abc import Iterable, Sequence
-    from typing import Any, Callable, Literal, NoReturn
+    from collections.abc import Callable, Iterable, Sequence
+    from typing import Any, Literal, NoReturn
 
 T = TypeVar("T")
 

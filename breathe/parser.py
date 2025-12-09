@@ -10,17 +10,11 @@ from breathe import file_state_cache, path_handler
 from breathe._parser import *
 
 if TYPE_CHECKING:
-    import sys
-    from typing import Union
+    from typing import TypeAlias, Union
 
     from sphinx.application import Sphinx
 
     from breathe.project import ProjectInfo
-
-    if sys.version_info >= (3, 10):
-        from typing import TypeAlias
-    else:
-        from typing_extensions import TypeAlias
 
     NodeOrValue: TypeAlias = Union[Node, str, None]
 
