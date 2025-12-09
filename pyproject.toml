@@ -63,7 +63,7 @@ lint = [
     # "sphinx-csharp @ git+https://github.com/rogerbarton/sphinx-csharp.git",  # for mypy
 ]
 test = [
-    "pytest>=8.0",
+    "pytest>=8.0,<9.0",
     "Sphinx[test]"
 ]
 
