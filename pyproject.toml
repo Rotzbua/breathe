@@ -55,7 +55,7 @@ lint = [
     "mypy>=1",
     "types-docutils",
     "types-Pygments",
-    "pytest>=8.0",  # for mypy
+    "pytest>=8.0,<9.0",  # for mypy
     "sphinxcontrib-phpdomain",  # for mypy
     # The API that we depend on is only implemented in rogerbarton's fork of sphinx-csharp
     # and not in the one that is published to PyPI. But we can't publish Breathe to PyPI with
