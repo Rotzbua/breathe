@@ -8,7 +8,8 @@ from breathe.finder import index as indexfinder
 from breathe.renderer import TaggedNode
 
 if TYPE_CHECKING:
-    from typing import Callable, Union
+    from collections.abc import Callable
+    from typing import Union
 
     from sphinx.application import Sphinx
 

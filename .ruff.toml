@@ -1,4 +1,4 @@
-target-version = "py39"  # Pin Ruff to Python 3.9
+target-version = "py310"  # Pin Ruff to the lowest supported Python
 line-length = 100
 output-format = "full"
 
@@ -10,6 +10,7 @@ quote-style = "double"
 preview = true
 ignore = [
     "UP031",  # Use format specifiers instead of percent format
+    "UP007",  # Keep typing with Union[].
 ]
 select = [
     "C4",    # flake8-comprehensions

@@ -51,15 +51,15 @@ from breathe import parser, renderer
 
 if TYPE_CHECKING:
     import sys
-    from collections.abc import Container, Iterable, Mapping
-    from typing import Any, Callable, SupportsIndex, Union
+    from collections.abc import Callable, Container, Iterable, Mapping
+    from typing import Any, SupportsIndex, Union
 
     from sphinx.application import Sphinx
 
     if sys.version_info >= (3, 11):
         from typing import Any, TypeAlias
     else:
-        from typing_extensions import TypeAlias
+        from typing import TypeAlias
 
     from breathe.directives.class_like import DoxClassOptions
     from breathe.directives.content_block import DoxContentBlockOptions
@@ -306,7 +306,7 @@ def create_class_filter(app: Sphinx, target: str, options: DoxClassOptions) -> D
 def create_outline_filter(options: Mapping[str, Any]) -> DoxFilter:
     if "outline" in options:
         return lambda nstack: not isinstance(
-            nstack.node, (parser.Node_descriptionType, parser.Node_incType)
+            nstack.node, parser.Node_descriptionType | parser.Node_incType
         )
 
     return lambda nstack: True
