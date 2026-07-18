@@ -103,12 +103,10 @@ jobs:
         sudo make install
 
     - name: Install dependencies
-      # "--editable" is needed so that _parser.py is placed in the local
-      # folder where pytest will import from
       run: |
         pip install --upgrade pip
-        pip install --editable .[build]
-        pip install --editable .[test]
+        pip install --group build --group build
+        pip install --group build --group test
 
     - name: Version info
       run: |
