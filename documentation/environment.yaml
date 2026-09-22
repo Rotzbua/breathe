@@ -11,4 +11,4 @@ dependencies:
   - doxygen
   - pip
   - pip:
-    - ".[docs,lint,test]"
+    - "--group docs,lint,test"

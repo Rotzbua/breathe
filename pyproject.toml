@@ -41,7 +41,7 @@ dependencies = [
 ]
 dynamic = ["version"]
 
-[project.optional-dependencies]
+[dependency-groups]
 build = [
     "setuptools>=80.9.0"
 ]
