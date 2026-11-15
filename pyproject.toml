@@ -37,7 +37,7 @@ classifiers = [
     "Topic :: Utilities",
 ]
 dependencies = [
-    "Sphinx>=7.2",
+    "Sphinx>=7.2,<11",
 ]
 dynamic = ["version"]
 
@@ -128,3 +128,8 @@ module = [
     "breathe.parser.indexsuper",
 ]
 ignore_errors = true
+
+[tool.pytest.ini_options]
+filterwarnings = [
+    "ignore::sphinx.deprecation.RemovedInSphinx11Warning",
+]

@@ -6,6 +6,7 @@ on:
       - ".github/workflows/unit_tests.yml"
       - "breathe/**"
       - "tests/**"
+      - "pyproject.toml"
 
 permissions:
   contents: read
@@ -30,22 +31,13 @@ jobs:
       fail-fast: false
       matrix:
         doxygen-version:
-          - '1.9.4'
-          - '1.9.7'
+          - '1.9.8' # Ubuntu 24.04 + Debian 13
         python-version:
-          - '3.11'
-          - '3.12'
-          - '3.13'
-          - '3.14'
+          - '3.15'
         sphinx-version:
-          - '7.2' # Ubuntu 24.04
-          # version 7.3 broke up the domain modules into packages, changing
-          # where some classes had to be imported from
-          - '7.3'
-          - '7.4' # Ubuntu 24.10
-          - '8.0'
-          - '8.1' # Ubuntu 25.04
-          - '8.2' # Ubuntu 25.04
+          - '9.0'
+          - '9.1'
+          - '9.2'
 
     steps:
     - uses: actions/checkout@v7

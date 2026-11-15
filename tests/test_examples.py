@@ -9,6 +9,7 @@ import subprocess
 from xml.parsers import expat
 
 import pytest
+import sphinx
 
 from breathe.process import AutoDoxygenProcessHandle
 
@@ -150,9 +151,16 @@ def str_to_set(x):
     return frozenset(x.split())
 
 
-def attr_compare(name, actual, expected):
+def attr_compare(name: str, actual, expected) -> bool:
     if name == "classes":
         return str_to_set(actual) >= str_to_set(expected)
+
+    if 9 <= sphinx.version_info[0]:
+        # Sphinx 9 uses newer docutils which uses "0" and "1" for boolean.
+        if expected == "True":
+            return actual == "1" or actual == expected
+        if expected == "False":
+            return actual == "0" or actual == expected
 
     return actual == expected
 
