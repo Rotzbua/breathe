@@ -128,3 +128,8 @@ module = [
     "breathe.parser.indexsuper",
 ]
 ignore_errors = true
+
+[tool.pytest.ini_options]
+filterwarnings = [
+    "ignore::sphinx.deprecation.RemovedInSphinx11Warning",
+]
